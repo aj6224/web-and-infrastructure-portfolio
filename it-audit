@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Audit & Controls Dashboard | Judd Cyber Consulting Group</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-blue: #2563eb;
+            --accent-cyan: #0284c7;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dark: #334155;
+            --bg-light: #f8fafc;
+            --card-border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 1.25rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-light);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            padding: 5rem 8% 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-cyan);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .main-container {
+            padding: 3rem 8%;
+            margin-top: -3rem;
+        }
+
+        .case-study-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            border-bottom: 1px dashed var(--card-border);
+            padding-bottom: 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+        }
+
+        .section-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .badge-sox {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .chart-box {
+            background: var(--bg-light);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-box h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            align-self: flex-start;
+        }
+
+        /* SVG Donut Chart Styling */
+        .donut-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .donut-chart {
+            transform: rotate(-90deg);
+            border-radius: 50%;
+        }
+
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-center .percentage {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+
+        .donut-center .label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
+        }
+
+        .legend {
+            margin-top: 1.5rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        /* Bar Chart Styling */
+        .bar-chart-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .bar-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .bar-track {
+            background: #e2e8f0;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* */
+        /* Table Styling */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .audit-table th {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .audit-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-dark);
+        }
+
+        .audit-table tr:hover {
+            background: #f1f5f9;
+        }
+
+        .status-pill {
+            padding: 0.25rem 0.65rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .status-effective { background: #d1fae5; color: #065f46; }
+        .status-remediate { background: #fef3c7; color: #92400e; }
+        .status-gap { background: #fee2e2; color: #991b1b; }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2.5rem 8%;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--secondary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">JUDD CYBER <span>CONSULTING GROUP</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="architecture_diagram.html">Architecture</a>
+            <a href="#" class="active">IT Audit</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>IT Audit & <span>Controls Assurance</span></h1>
+        <p>Enterprise ITGC evaluation, Sarbanes-Oxley (SOX 404) compliance testing, and technical risk analytics.</p>
+    </section>
+
+    <main class="main-container">
+        <div class="case-study-card">
+            <div class="section-header">
+                <div>
+                    <h2>Case Study: Enterprise ITGC & Access Risk Review</h2>
+                    <p>Client: Regional Financial Services Firm | Scope: Core Banking & ERP Infrastructure</p>
+                </div>
+                <span class="badge-sox">SOX / SOC 2 Type II Compliance</span>
+            </div>
+
+            <!-- Visualization Grid -->
+            <div class="analytics-grid">
+                
+                <!-- Donut Chart: Compliance Breakdown -->
+                <div class="chart-box">
+                    <h3>ITGC Control Effectiveness</h3>
+                    <div class="donut-wrapper">
+                        <svg class="donut-chart" width="200" height="200" viewBox="0 0 42 42">
+                            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#e2e8f0" stroke-width="5"></circle>
+                            <!-- Effective 65% -->
+                            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#10b981" stroke-width="5" stroke-dasharray="65 35" stroke-dashoffset="0"></circle>
+                            <!-- Minor Remediation 20% -->
+                            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f59e0b" stroke-width="5" stroke-dasharray="20 80" stroke-dashoffset="-65"></circle>
+                            <!-- Strategic Gaps 15% -->
+                            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ef4444" stroke-width="5" stroke-dasharray="15 85" stroke-dashoffset="-85"></circle>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="percentage">85%</div>
+                            <div class="label">Pass Rate</div>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span><span class="legend-color" style="background:#10b981;"></span>Effective Controls</span>
+                            <strong>65%</strong>
+                        </div>
+                        <div class="legend-item">
+                            <span><span class="legend-color" style="background:#f59e0b;"></span>Minor Remediation</span>
+                            <strong>20%</strong>
+                        </div>
+                        <div class="legend-item">
+                            <span><span class="legend-color" style="background:#ef4444;"></span>Control Deficiencies</span>
+                            <strong>15%</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bar Chart: Risk Findings Severity -->
+                <div class="chart-box">
+                    <h3>Audit Deficiencies by Severity</h3>
+                    <div class="bar-chart-container">
+                        
+                        <div class="bar-group">
+                            <div class="bar-info">
+                                <span>Low Risk (Minor Exceptions)</span>
+                                <span>12 Issues</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 60%; background: #10b981;"></div>
+                            </div>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar-info">
+                                <span>Medium Risk (Process Gaps)</span>
+                                <span>5 Issues</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 30%; background: #f59e0b;"></div>
+                            </div>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar-info">
+                                <span>High Risk (SoD Conflicts / Unvaulted Admin)</span>
+                                <span>2 Issues</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 15%; background: #ef4444;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Audit Findings Summary Table -->
+            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Summary Audit Findings & Control Matrix</h3>
+            <div class="table-responsive">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Control Objective</th>
+                            <th>Assessment Result</th>
+                            <th>Remediation Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Identity & Access Management</strong></td>
+                            <td>Quarterly Privileged Access Certification</td>
+                            <td><span class="status-pill status-remediate">Minor Exception</span></td>
+                            <td>Automate Active Directory quarterly entitlement reviews via script.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Segregation of Duties</strong></td>
+                            <td>Developers restricted from Production DB access</td>
+                            <td><span class="status-pill status-gap">Deficiency</span></td>
+                            <td>Enforce CyberArk PAM credential vaulting and session logging.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Change Management</strong></td>
+                            <td>Formal Peer Review & QA Sign-off prior to release</td>
+                            <td><span class="status-pill status-effective">Effective</span></td>
+                            <td>Controls functioning as designed. No exceptions noted.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Backup & Recovery</strong></td>
+                            <td>Encrypted off-site automated nightly backups</td>
+                            <td><span class="status-pill status-effective">Effective</span></td>
+                            <td>Control validated through annual disaster recovery exercise.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Judd Cyber Consulting Group. CIS Portfolio Front-End Artifact.</p>
+    </footer>
+
+</body>
+</html>
