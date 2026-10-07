@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judd Cyber Consulting Group | Technology Risk & Cyber Advisory</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-blue: #2563eb;
+            --accent-cyan: #0284c7;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dark: #334155;
+            --bg-light: #f8fafc;
+            --card-border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 1.25rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-light);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            padding: 6rem 8% 7rem; /* Added padding since button is removed */
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-cyan);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 5rem 8%;
+            margin-top: -2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            font-size: 1.35rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 0.975rem;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2.5rem 8%;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--secondary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">JUDD CYBER <span>CONSULTING GROUP</span></div>
+        <nav>
+            <a href="#services">Capabilities</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#compliance">IT Audit</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Technology Risk & <span>Cyber Advisory</span></h1>
+        <p>Bridging the gap between complex IT infrastructure, database security, and enterprise risk management through structured audits and technical execution.</p>
+        <!-- GitHub Button Removed -->
+    </section>
+
+    <section class="services" id="services">
+        <div class="card">
+            <span class="card-tag">IT General Controls</span>
+            <h3>Technology Risk Assurance</h3>
+            <p>Evaluating enterprise IT general controls (ITGCs), user access management, segregation of duties (SoD), and change management controls across enterprise systems.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-tag">Data Architecture</span>
+            <h3>Database Engineering & SQL</h3>
+            <p>Designing normalized 3NF relational schemas, constructing ERD diagrams, and authoring complex SQL scripts for multi-table analytical queries.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-tag">Systems Analysis</span>
+            <h3>Enterprise Architecture</h3>
+            <p>Mapping supply chain logistics, defining non-profit stakeholder functional requirements, and deploying custom web architectures.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Judd Cyber Consulting Group. CIS Portfolio Front-End Artifact.</p>
+    </footer>
+
+</body>
+</html>
